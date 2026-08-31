@@ -16,7 +16,6 @@ RSpec.describe "shopping_lists/edit", type: :view do
     render
 
     assert_select "form[action=?][method=?]", shopping_list_path(shopping_list), "post" do
-
       assert_select "input[name=?]", "shopping_list[name]"
 
       assert_select "textarea[name=?]", "shopping_list[memo]"
