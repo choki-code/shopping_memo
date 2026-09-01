@@ -17,11 +17,14 @@ RSpec.describe "/shopping_lists", type: :request do
   # ShoppingList. As you add validations to ShoppingList, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+    { name: "週末の買い物", memo: "牛乳とパンを買う" }
   }
 
+  # name に presence バリデーションがあるので、name を空にすると無効になる。
+  # memo は残す（両方空にするとパラメータ自体が空になり、
+  # Strong Parameters の require が 400 を返してしまい、422 の検証にならないため）
   let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+    { name: "", memo: "牛乳とパンを買う" }
   }
 
   describe "GET /index" do
@@ -86,14 +89,15 @@ RSpec.describe "/shopping_lists", type: :request do
   describe "PATCH /update" do
     context "with valid parameters" do
       let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+        { name: "平日の買い物", memo: "卵を買う" }
       }
 
       it "updates the requested shopping_list" do
         shopping_list = ShoppingList.create! valid_attributes
         patch shopping_list_url(shopping_list), params: { shopping_list: new_attributes }
         shopping_list.reload
-        skip("Add assertions for updated state")
+        expect(shopping_list.name).to eq("平日の買い物")
+        expect(shopping_list.memo).to eq("卵を買う")
       end
 
       it "redirects to the shopping_list" do
