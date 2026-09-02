@@ -65,6 +65,12 @@ RSpec.configure do |config|
   # To enable this behaviour uncomment the line below.
   # config.infer_spec_type_from_file_location!
 
+  # システムスペック（type: :system）はブラウザを起動して動かす。
+  # CI には画面が無いのでヘッドレス Chrome を使う。
+  config.before(:each, type: :system) do
+    driven_by :selenium, using: :headless_chrome, screen_size: [ 1400, 1400 ]
+  end
+
   # Filter lines from Rails gems in backtraces.
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
