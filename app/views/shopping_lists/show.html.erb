@@ -1,20 +1,21 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @shopping_list %>
-<h2>品目</h2>
+<h2>Items</h2>
 <% @items.each do |item| %>
   <%= item.name %>
-  <%= button_to "削除", [@shopping_list, item], method: :delete %>
+  <%= button_to "Destroy this item", [@shopping_list, item], method: :delete %>
 <% end %>
 
 <%= form_with model: [@shopping_list, @item] do |form| %>
+  <%= render "shared/error_messages", model: @item %>
   <div>
-    <%= form.label :name, "品目名" %>
+    <%= form.label :name, style: "display: block" %>
     <%= form.text_field :name %>
   </div>
 
   <div>
-    <%= form.submit "追加" %>
+    <%= form.submit %>
   </div>
 <% end %>
 

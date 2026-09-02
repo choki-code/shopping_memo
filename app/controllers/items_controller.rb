@@ -6,7 +6,8 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to @shopping_list, notice: "Item was successfully created."
     else
-      redirect_to @shopping_list, alert: "Failed to create item."
+      @items = @shopping_list.items.order(:created_at)
+      render "shopping_lists/show", status: :unprocessable_content
     end
   end
 
