@@ -65,11 +65,11 @@ RSpec.describe Item, type: :model do
     let!(:bread) { shopping_list.items.create!(name: 'パン', purchased: true) }
 
     it 'unpurchasedは未購入の品目だけを返す' do
-      expect(shopping_list.items.unpurchased).to eq([milk])
+      expect(shopping_list.items.unpurchased).to eq([ milk ])
     end
 
     it 'purchasedは購入済みの品目だけを返す' do
-      expect(shopping_list.items.purchased).to eq([bread])
+      expect(shopping_list.items.purchased).to eq([ bread ])
     end
   end
 end
