@@ -14,13 +14,9 @@ class ItemsController < ApplicationController
 
   def update
     @item = @shopping_list.items.find(params.expect(:id))
-    if @item.update(purchased_params)
-      redirect_to @shopping_list, notice: "Item was successfully updated."
-    else
-      @unpurchased = @shopping_list.items.unpurchased.order(:created_at)
-      @purchased = @shopping_list.items.purchased.order(:created_at)
-      render "shopping_lists/show", status: :unprocessable_content
-    end
+    @item.update!(purchased_params)
+
+    redirect_to @shopping_list, notice: "Item was successfully updated."
   end
 
   def destroy
