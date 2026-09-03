@@ -46,6 +46,47 @@ RSpec.describe "/shopping_lists/:shopping_list_id/items", type: :request do
     end
   end
 
+  describe "PATCH /update" do
+    it "未購入の品目を購入済みに変える" do
+      item = shopping_list.items.create!(valid_attributes)
+
+      patch shopping_list_item_url(shopping_list, item), params: { item: { purchased: true } }
+
+      expect(item.reload.purchased).to be(true)
+    end
+
+    it "買い物リストの詳細画面にリダイレクトする" do
+      item = shopping_list.items.create!(valid_attributes)
+
+      patch shopping_list_item_url(shopping_list, item), params: { item: { purchased: true } }
+
+      expect(response).to redirect_to(shopping_list_url(shopping_list))
+    end
+
+    context "許可してない属性を混ぜて送った場合" do
+      it "nameは書き変わらない" do
+        item = shopping_list.items.create!(valid_attributes)
+
+        patch shopping_list_item_url(shopping_list, item), params: { item: { purchased: true, name: "書き換え" } }
+
+        expect(item.reload.name).to eq("牛乳")
+        expect(item.purchased).to be(true)
+      end
+    end
+
+    context "URL のリストに属さない品目を指定した場合" do
+      it "404 を返し、購入状態を変えない" do
+        other_list = ShoppingList.create!(name: "平日の買い物")
+        other_item = other_list.items.create!(name: "卵")
+
+        patch shopping_list_item_url(shopping_list, other_item), params: { item: { purchased: true } }
+
+        expect(response).to have_http_status(:not_found)
+        expect(other_item.reload.purchased).to be(false)
+      end
+    end
+  end
+
   describe "DELETE /destroy" do
     it "品目が1件減る" do
       item = shopping_list.items.create!(valid_attributes)
