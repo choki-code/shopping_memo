@@ -38,6 +38,28 @@ RSpec.describe "品目", type: :system do
     end
   end
 
+  describe "詳細画面から購入状態を切り替える" do
+    it "☐ を押すと購入済みセクションに移動する" do
+      shopping_list.items.create!(name: "キャベツ")
+
+      visit shopping_list_path(shopping_list)
+      click_on "☐"
+
+      expect(page).to have_content "Item was successfully updated."
+      expect(page).to have_content "☑"
+    end
+
+    it "☑ を押すと未購入セクションに戻る" do
+      shopping_list.items.create!(name: "キャベツ", purchased: true)
+
+      visit shopping_list_path(shopping_list)
+      click_on "☑"
+
+      expect(page).to have_content "Item was successfully updated."
+      expect(page).to have_content "☐"
+    end
+  end
+
   describe "買い物リストごと削除する" do
     it "リストを削除すると品目も消える" do
       shopping_list.items.create!(name: "キャベツ")

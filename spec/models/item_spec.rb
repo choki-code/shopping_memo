@@ -52,4 +52,24 @@ RSpec.describe Item, type: :model do
       expect { shopping_list.destroy }.to change(Item, :count).by(-1)
     end
   end
+
+  describe 'purchased の既定値の検証' do
+    it '新しく作った品目は未購入である' do
+      item = shopping_list.items.create!(name: name)
+      expect(item.purchased).to be(false)
+    end
+  end
+
+  describe 'scopeの検証' do
+    let!(:milk) { shopping_list.items.create!(name: '牛乳', purchased: false) }
+    let!(:bread) { shopping_list.items.create!(name: 'パン', purchased: true) }
+
+    it 'unpurchasedは未購入の品目だけを返す' do
+      expect(shopping_list.items.unpurchased).to eq([ milk ])
+    end
+
+    it 'purchasedは購入済みの品目だけを返す' do
+      expect(shopping_list.items.purchased).to eq([ bread ])
+    end
+  end
 end

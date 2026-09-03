@@ -6,12 +6,14 @@ RSpec.describe "shopping_lists/show", type: :view do
   end
   let!(:milk) { shopping_list.items.create!(name: "牛乳") }
   let!(:bread) { shopping_list.items.create!(name: "パン") }
+  let!(:egg) { shopping_list.items.create!(name: "卵", purchased: true) }
 
   before(:each) do
-    # コントローラの show が用意しているものと同じ 3 つを渡す。
+    # コントローラの show が用意しているものと同じ 4 つを渡す。
     # view spec はコントローラを通らないため、ここで揃えないと nil になる
     assign(:shopping_list, shopping_list)
-    assign(:items, shopping_list.items.order(:created_at))
+    assign(:unpurchased, shopping_list.items.unpurchased.order(:created_at))
+    assign(:purchased, shopping_list.items.purchased.order(:created_at))
     assign(:item, shopping_list.items.build)
   end
 
@@ -52,5 +54,23 @@ RSpec.describe "shopping_lists/show", type: :view do
     assert_select "form[action=?][method=?]", shopping_list_items_path(shopping_list), "post" do
       assert_select "input[name=?]", "item[name]"
     end
+  end
+
+  it "未購入の品目を未購入セクションに表示する" do
+    render
+
+    section = rendered[rendered.index("Unpurchased Items")...rendered.index("Purchased Items")]
+
+    expect(section).to include("牛乳")
+    expect(section).not_to include("卵")
+  end
+
+  it "購入済みの品目を購入済みセクションに表示する" do
+    render
+
+    section = rendered[rendered.index("Purchased Items")..]
+
+    expect(section).to include("卵")
+    expect(section).not_to include("牛乳")
   end
 end

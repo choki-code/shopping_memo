@@ -8,7 +8,8 @@ class ShoppingListsController < ApplicationController
 
   # GET /shopping_lists/1 or /shopping_lists/1.json
   def show
-    @items = @shopping_list.items.order(:created_at)
+    @unpurchased = @shopping_list.items.unpurchased.order(:created_at)
+    @purchased = @shopping_list.items.purchased.order(:created_at)
     @item = @shopping_list.items.build
   end
 
