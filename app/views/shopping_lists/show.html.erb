@@ -1,8 +1,14 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @shopping_list %>
-<h2>Items</h2>
-<% @items.each do |item| %>
+<h2>Unpurchased Items</h2>
+<% @unpurchased.each do |item| %>
+  <%= item.name %>
+  <%= button_to "Destroy this item", [@shopping_list, item], method: :delete %>
+<% end %>
+
+<h2>Purchased Items</h2>
+<% @purchased.each do |item| %>
   <%= item.name %>
   <%= button_to "Destroy this item", [@shopping_list, item], method: :delete %>
 <% end %>

@@ -8,10 +8,11 @@ RSpec.describe "shopping_lists/show", type: :view do
   let!(:bread) { shopping_list.items.create!(name: "パン") }
 
   before(:each) do
-    # コントローラの show が用意しているものと同じ 3 つを渡す。
+    # コントローラの show が用意しているものと同じ 4 つを渡す。
     # view spec はコントローラを通らないため、ここで揃えないと nil になる
     assign(:shopping_list, shopping_list)
-    assign(:items, shopping_list.items.order(:created_at))
+    assign(:unpurchased, shopping_list.items.unpurchased.order(:created_at))
+    assign(:purchased, shopping_list.items.purchased.order(:created_at))
     assign(:item, shopping_list.items.build)
   end
 

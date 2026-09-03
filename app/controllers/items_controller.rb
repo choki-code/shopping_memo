@@ -6,7 +6,8 @@ class ItemsController < ApplicationController
     if @item.save
       redirect_to @shopping_list, notice: "Item was successfully created."
     else
-      @items = @shopping_list.items.order(:created_at)
+      @unpurchased = @shopping_list.items.unpurchased.order(:created_at)
+      @purchased = @shopping_list.items.purchased.order(:created_at)
       render "shopping_lists/show", status: :unprocessable_content
     end
   end
@@ -16,7 +17,8 @@ class ItemsController < ApplicationController
     if @item.update(purchased_params)
       redirect_to @shopping_list, notice: "Item was successfully updated."
     else
-      @items = @shopping_list.items.order(:created_at)
+      @unpurchased = @shopping_list.items.unpurchased.order(:created_at)
+      @purchased = @shopping_list.items.purchased.order(:created_at)
       render "shopping_lists/show", status: :unprocessable_content
     end
   end
