@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :shopping_lists do
-    resources :items, only: %i[ create destroy update]
+    resources :items, only: %i[ create update destroy ]
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

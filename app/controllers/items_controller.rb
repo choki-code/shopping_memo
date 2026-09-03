@@ -11,6 +11,16 @@ class ItemsController < ApplicationController
     end
   end
 
+  def update
+    @item = @shopping_list.items.find(params.expect(:id))
+    if @item.update(purchased_params)
+      redirect_to @shopping_list, notice: "Item was successfully updated."
+    else
+      @items = @shopping_list.items.order(:created_at)
+      render "shopping_lists/show", status: :unprocessable_content
+    end
+  end
+
   def destroy
     @item = @shopping_list.items.find(params.expect(:id))
     @item.destroy!
@@ -26,5 +36,9 @@ class ItemsController < ApplicationController
 
   def item_params
     params.expect(item: [ :name ])
+  end
+
+  def purchased_params
+    params.expect(item: [ :purchased ])
   end
 end
