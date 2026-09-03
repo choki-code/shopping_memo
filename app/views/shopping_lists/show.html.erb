@@ -5,12 +5,14 @@
 <% @unpurchased.each do |item| %>
   <%= item.name %>
   <%= button_to "Destroy this item", [@shopping_list, item], method: :delete %>
+  <%= button_to "☐", [@shopping_list, item], method: :patch, params: { item: { purchased: true } } %>
 <% end %>
 
 <h2>Purchased Items</h2>
 <% @purchased.each do |item| %>
   <%= item.name %>
   <%= button_to "Destroy this item", [@shopping_list, item], method: :delete %>
+  <%= button_to "☑", [@shopping_list, item], method: :patch, params: { item: { purchased: false } } %>
 <% end %>
 
 <%= form_with model: [@shopping_list, @item] do |form| %>
