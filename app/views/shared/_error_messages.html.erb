@@ -1,6 +1,6 @@
 <% if model.errors.any? %>
   <div style="color: red">
-    <p><%= pluralize(model.errors.count, "error") %> prohibited this <%= model.model_name.human.downcase %> from being saved:</p>
+    <p><%= model.model_name.human %>に<%= model.errors.count %>個のエラーが発生しました</p>
 
     <ul>
       <% model.errors.each do |error| %>

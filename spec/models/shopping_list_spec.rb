@@ -26,7 +26,7 @@ RSpec.describe ShoppingList, type: :model do
 
         it '無効である' do
           expect(shopping_list.valid?).to be(false)
-          expect(shopping_list.errors[:name]).to include("can't be blank")
+          expect(shopping_list.errors.full_messages).to include("リスト名を入力してください")
         end
       end
     end

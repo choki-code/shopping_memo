@@ -9,19 +9,19 @@ RSpec.describe "品目", type: :system do
     it "追加した品目が一覧に表示される" do
       visit shopping_list_path(shopping_list)
 
-      fill_in "Name", with: "キャベツ"
-      click_on "Create Item"
+      fill_in "品目名", with: "キャベツ"
+      click_on "登録する"
 
-      expect(page).to have_content "Item was successfully created."
+      expect(page).to have_content "品目を追加しました。"
       expect(page).to have_content "キャベツ"
     end
 
     it "名前が空のときは追加できず、エラーが表示される" do
       visit shopping_list_path(shopping_list)
 
-      click_on "Create Item"
+      click_on "登録する"
 
-      expect(page).to have_content "Name can't be blank"
+      expect(page).to have_content "品目名を入力してください"
       expect(shopping_list.items.count).to eq 0
     end
   end
@@ -31,9 +31,9 @@ RSpec.describe "品目", type: :system do
       shopping_list.items.create!(name: "キャベツ")
 
       visit shopping_list_path(shopping_list)
-      click_on "Destroy this item"
+      click_on "この品目を削除"
 
-      expect(page).to have_content "Item was successfully destroyed."
+      expect(page).to have_content "品目を削除しました。"
       expect(page).to have_no_content "キャベツ"
     end
   end
@@ -45,7 +45,7 @@ RSpec.describe "品目", type: :system do
       visit shopping_list_path(shopping_list)
       click_on "☐"
 
-      expect(page).to have_content "Item was successfully updated."
+      expect(page).to have_content "品目の購入状態を更新しました。"
       expect(page).to have_content "☑"
     end
 
@@ -55,7 +55,7 @@ RSpec.describe "品目", type: :system do
       visit shopping_list_path(shopping_list)
       click_on "☑"
 
-      expect(page).to have_content "Item was successfully updated."
+      expect(page).to have_content "品目の購入状態を更新しました。"
       expect(page).to have_content "☐"
     end
   end
@@ -65,9 +65,9 @@ RSpec.describe "品目", type: :system do
       shopping_list.items.create!(name: "キャベツ")
 
       visit shopping_list_path(shopping_list)
-      click_on "Destroy this shopping list"
+      click_on "このリストを削除"
 
-      expect(page).to have_content "Shopping list was successfully destroyed."
+      expect(page).to have_content "買い物リストを削除しました。"
       expect(Item.count).to eq 0
     end
   end

@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
     @item = @shopping_list.items.build(item_params)
 
     if @item.save
-      redirect_to @shopping_list, notice: "Item was successfully created."
+      redirect_to @shopping_list, notice: "品目を追加しました。"
     else
       @unpurchased = @shopping_list.items.unpurchased.order(:created_at)
       @purchased = @shopping_list.items.purchased.order(:created_at)
@@ -16,14 +16,14 @@ class ItemsController < ApplicationController
     @item = @shopping_list.items.find(params.expect(:id))
     @item.update!(purchased_params)
 
-    redirect_to @shopping_list, notice: "Item was successfully updated."
+    redirect_to @shopping_list, notice: "品目の購入状態を更新しました。"
   end
 
   def destroy
     @item = @shopping_list.items.find(params.expect(:id))
     @item.destroy!
 
-    redirect_to @shopping_list, notice: "Item was successfully destroyed.", status: :see_other
+    redirect_to @shopping_list, notice: "品目を削除しました。", status: :see_other
   end
 
   private

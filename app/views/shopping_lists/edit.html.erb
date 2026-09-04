@@ -1,12 +1,12 @@
-<% content_for :title, "Editing shopping list" %>
+<% content_for :title, "買い物リストを編集" %>
 
-<h1>Editing shopping list</h1>
+<h1>買い物リストを編集</h1>
 
 <%= render "form", shopping_list: @shopping_list %>
 
 <br>
 
 <div>
-  <%= link_to "Show this shopping list", @shopping_list %> |
-  <%= link_to "Back to shopping lists", shopping_lists_path %>
+  <%= link_to "このリストを見る", @shopping_list %> |
+  <%= link_to "リスト一覧に戻る", shopping_lists_path %>
 </div>

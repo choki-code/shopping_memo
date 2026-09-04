@@ -19,7 +19,7 @@ RSpec.describe Item, type: :model do
 
         it '無効である' do
           expect(item.valid?).to be(false)
-          expect(item.errors[:name]).to include("can't be blank")
+          expect(item.errors.full_messages).to include("品目名を入力してください")
         end
       end
 
@@ -28,7 +28,7 @@ RSpec.describe Item, type: :model do
 
         it '無効である' do
           expect(item.valid?).to be(false)
-          expect(item.errors[:shopping_list]).to include('must exist')
+          expect(item.errors.full_messages).to include("買い物リストを入力してください")
         end
       end
     end

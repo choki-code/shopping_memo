@@ -1,17 +1,17 @@
 <p style="color: green"><%= notice %></p>
 
 <%= render @shopping_list %>
-<h2>Unpurchased Items</h2>
+<h2>まだ買っていないもの</h2>
 <% @unpurchased.each do |item| %>
   <%= item.name %>
-  <%= button_to "Destroy this item", [@shopping_list, item], method: :delete %>
+  <%= button_to "この品目を削除", [@shopping_list, item], method: :delete %>
   <%= button_to "☐", [@shopping_list, item], method: :patch, params: { item: { purchased: true } } %>
 <% end %>
 
-<h2>Purchased Items</h2>
+<h2>買ったもの</h2>
 <% @purchased.each do |item| %>
   <%= item.name %>
-  <%= button_to "Destroy this item", [@shopping_list, item], method: :delete %>
+  <%= button_to "この品目を削除", [@shopping_list, item], method: :delete %>
   <%= button_to "☑", [@shopping_list, item], method: :patch, params: { item: { purchased: false } } %>
 <% end %>
 
@@ -28,8 +28,8 @@
 <% end %>
 
 <div>
-  <%= link_to "Edit this shopping list", edit_shopping_list_path(@shopping_list) %> |
-  <%= link_to "Back to shopping lists", shopping_lists_path %>
+  <%= link_to "このリストを編集", edit_shopping_list_path(@shopping_list) %> |
+  <%= link_to "リスト一覧に戻る", shopping_lists_path %>
 
-  <%= button_to "Destroy this shopping list", @shopping_list, method: :delete %>
+  <%= button_to "このリストを削除", @shopping_list, method: :delete %>
 </div>

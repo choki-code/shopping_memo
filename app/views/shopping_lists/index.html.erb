@@ -1,16 +1,16 @@
 <p style="color: green"><%= notice %></p>
 
-<% content_for :title, "Shopping lists" %>
+<% content_for :title, "買い物リスト" %>
 
-<h1>Shopping lists</h1>
+<h1>買い物リスト</h1>
 
 <div id="shopping_lists">
   <% @shopping_lists.each do |shopping_list| %>
     <%= render shopping_list %>
     <p>
-      <%= link_to "Show this shopping list", shopping_list %>
+      <%= link_to "このリストを見る", shopping_list %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New shopping list", new_shopping_list_path %>
+<%= link_to "リストを新規作成", new_shopping_list_path %>
