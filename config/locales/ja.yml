@@ -1,0 +1,13 @@
+ja:
+  activerecord:
+    models:
+      shopping_list: 買い物リスト
+      item: 品目
+    attributes:
+      shopping_list:
+        name: リスト名
+        memo: メモ
+      item:
+        name: 品目名
+        purchased: 購入済み
+        shopping_list: 買い物リスト
