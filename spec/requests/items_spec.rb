@@ -41,7 +41,7 @@ RSpec.describe "/shopping_lists/:shopping_list_id/items", type: :request do
         post shopping_list_items_url(shopping_list), params: { item: invalid_attributes }
 
         expect(response).to have_http_status(:unprocessable_content)
-        expect(response.body).to include("prohibited this item from being saved")
+        expect(response.body).to include("品目に1個のエラーが発生しました")
       end
     end
   end

@@ -28,7 +28,7 @@ class ShoppingListsController < ApplicationController
 
     respond_to do |format|
       if @shopping_list.save
-        format.html { redirect_to @shopping_list, notice: "Shopping list was successfully created." }
+        format.html { redirect_to @shopping_list, notice: "買い物リストを作成しました。" }
         format.json { render :show, status: :created, location: @shopping_list }
       else
         format.html { render :new, status: :unprocessable_content }
@@ -41,7 +41,7 @@ class ShoppingListsController < ApplicationController
   def update
     respond_to do |format|
       if @shopping_list.update(shopping_list_params)
-        format.html { redirect_to @shopping_list, notice: "Shopping list was successfully updated.", status: :see_other }
+        format.html { redirect_to @shopping_list, notice: "買い物リストを更新しました。", status: :see_other }
         format.json { render :show, status: :ok, location: @shopping_list }
       else
         format.html { render :edit, status: :unprocessable_content }
@@ -55,7 +55,7 @@ class ShoppingListsController < ApplicationController
     @shopping_list.destroy!
 
     respond_to do |format|
-      format.html { redirect_to shopping_lists_path, notice: "Shopping list was successfully destroyed.", status: :see_other }
+      format.html { redirect_to shopping_lists_path, notice: "買い物リストを削除しました。", status: :see_other }
       format.json { head :no_content }
     end
   end

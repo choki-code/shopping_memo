@@ -59,7 +59,7 @@ RSpec.describe "shopping_lists/show", type: :view do
   it "未購入の品目を未購入セクションに表示する" do
     render
 
-    section = rendered[rendered.index("Unpurchased Items")...rendered.index("Purchased Items")]
+    section = rendered[rendered.index("まだ買っていないもの")...rendered.index("買ったもの")]
 
     expect(section).to include("牛乳")
     expect(section).not_to include("卵")
@@ -68,7 +68,7 @@ RSpec.describe "shopping_lists/show", type: :view do
   it "購入済みの品目を購入済みセクションに表示する" do
     render
 
-    section = rendered[rendered.index("Purchased Items")..]
+    section = rendered[rendered.index("買ったもの")..]
 
     expect(section).to include("卵")
     expect(section).not_to include("牛乳")
